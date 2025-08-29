@@ -22,31 +22,34 @@ const ContactInfoCard: React.FC<ContactInfoCardProps> = ({
   const { t } = useInternationalization();
 
   return (
-    <div className={`bg-card border border-border rounded-lg p-8 shadow-sm ${className}`}>
+    <div className={`bg-card border-2 border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow ${className}`}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-6 flex-1">
-          <div className="flex items-center justify-center w-16 h-16 bg-primary/10 rounded-lg">
-            <Icon className="h-8 w-8 text-primary" />
+        <div className="flex items-center space-x-4 flex-1">
+          <div className="flex items-center justify-center w-14 h-14 bg-primary/20 rounded-xl border border-primary/30">
+            <Icon className="h-7 w-7 text-primary" />
           </div>
           
-          <div className="flex-1">
-            <div className="text-muted-foreground kiosk-body mb-2">
+          <div className="flex-1 min-w-0">
+            <div className="text-muted-foreground text-base font-medium mb-1">
               {label}
             </div>
-            <div className="text-foreground kiosk-h2 font-semibold">
+            <div className="text-foreground text-xl font-semibold truncate">
               {value}
             </div>
           </div>
         </div>
 
         {onUpdate && (
-          <Button 
-            variant="primary" 
-            size="lg"
-            onClick={onUpdate}
-          >
-            {t('contact.update', 'Update')}
-          </Button>
+          <div className="ml-4">
+            <Button 
+              variant="secondary" 
+              size="lg"
+              onClick={onUpdate}
+              className="min-w-[100px]"
+            >
+              {t('contact.update', 'Update')}
+            </Button>
+          </div>
         )}
       </div>
     </div>

@@ -9,10 +9,12 @@ import Card from '@/components/kiosk/Card';
 import { KioskAPI } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const EidCard: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
 
   // Simulate eID card reading after 3 seconds
@@ -37,14 +39,14 @@ const EidCard: React.FC = () => {
       
       <div className="kiosk-content">
         <BackButton />
-        <Title>Patient identification</Title>
+        <Title>{t('eid.title', 'Patient identification')}</Title>
         
         <div className="flex-1 flex items-center justify-center">
           <div className="max-w-2xl w-full">
             <Card
-              title="Insert your eID card"
+              title={t('eid.instruction', 'Insert your eID card')}
               icon={<CreditCard className="w-full h-full animate-pulse" />}
-              description="Please insert your Belgian eID card into the card reader and wait for the system to read your information."
+              description={t('eid.description', 'Please insert your Belgian eID card into the card reader and wait for the system to read your information.')}
               className="text-center"
             />
           </div>

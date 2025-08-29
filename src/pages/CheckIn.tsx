@@ -10,10 +10,12 @@ import Loader from '@/components/kiosk/Loader';
 import { KioskAPI, CheckInMethod } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const CheckIn: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const [checkInMethods, setCheckInMethods] = useState<CheckInMethod[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -52,7 +54,7 @@ const CheckIn: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading check-in options..." />
+          <Loader text={t('loading.pleaseWait', 'Please wait...')} />
         </div>
         <Footer />
       </div>
@@ -64,13 +66,13 @@ const CheckIn: React.FC = () => {
       <Header currentTime={currentTime} />
       
       <div className="kiosk-content">
-        <Title>Patient identification</Title>
+        <Title>{t('checkIn.title', 'Patient identification')}</Title>
         
         <div className="flex-1 flex flex-col justify-center">
           <div className="grid grid-cols-2 gap-12 max-w-4xl mx-auto mb-12">
             {checkInMethods.find(m => m.id === 'eid') && (
               <Card
-                title="Enter your eID card"
+                title={t('checkIn.eidCard', 'Enter your eID card')}
                 icon={<CreditCard className="w-full h-full" />}
                 onClick={handleEidCardClick}
               />
@@ -78,7 +80,7 @@ const CheckIn: React.FC = () => {
             
             {checkInMethods.find(m => m.id === 'held') && (
               <Card
-                title="Sign in with your Held account"
+                title={t('checkIn.heldAccount', 'Sign in with your Held account')}
                 icon={<Smartphone className="w-full h-full" />}
                 onClick={handleHeldAccountClick}
               />
@@ -91,7 +93,7 @@ const CheckIn: React.FC = () => {
               size="sm"
               onClick={handleNoCardClick}
             >
-              I don't have my eID card or Held app with me
+              {t('checkIn.noCard', "I don't have my eID card or Held app with me")}
             </Button>
           </div>
         </div>

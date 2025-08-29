@@ -10,10 +10,12 @@ import Loader from '@/components/kiosk/Loader';
 import { KioskAPI, PatientFilters } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const ManualForename: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const [availableLetters, setAvailableLetters] = useState<string[]>([]);
   const [selectedLetter, setSelectedLetter] = useState<string>('');
   const [loading, setLoading] = useState(true);
@@ -73,7 +75,7 @@ const ManualForename: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading available options..." />
+          <Loader text={t('loading.availableOptions', 'Loading available options...')} />
         </div>
         <Footer />
       </div>
@@ -86,7 +88,7 @@ const ManualForename: React.FC = () => {
       
       <div className="kiosk-content">
         <BackButton />
-        <Title>Enter the first letter of your forename</Title>
+        <Title>{t('manual.forename', 'Enter the first letter of your forename')}</Title>
         
         <div className="flex-1 flex flex-col justify-center space-y-4">
           <Keyboard
@@ -105,7 +107,7 @@ const ManualForename: React.FC = () => {
               disabled={!selectedLetter}
               loading={continuing}
             >
-              Continue
+              {t('button.continue', 'Continue')}
             </Button>
           </div>
         </div>

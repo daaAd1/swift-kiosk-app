@@ -8,15 +8,16 @@ import LanguageCard from '@/components/kiosk/LanguageCard';
 import Loader from '@/components/kiosk/Loader';
 import { KioskAPI, ClinicInfo, Language } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 import clinicLogo from '@/assets/clinic-logo.png';
 
 const Welcome: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t, setLanguage, currentLanguage } = useInternationalization();
   
   const [clinicInfo, setClinicInfo] = useState<ClinicInfo | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,8 +48,7 @@ const Welcome: React.FC = () => {
   };
 
   const handleLanguageSelect = (languageCode: string) => {
-    setSelectedLanguage(languageCode);
-    // Here you would typically update the app's language context
+    setLanguage(languageCode);
   };
 
   if (loading) {
@@ -56,7 +56,7 @@ const Welcome: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} clinicName={clinicInfo?.name} />
         <div className="kiosk-content">
-          <Loader text="Loading clinic information..." />
+          <Loader text={t('loading.clinicInfo', 'Loading clinic information...')} />
         </div>
         <Footer />
       </div>
@@ -70,7 +70,7 @@ const Welcome: React.FC = () => {
         clinicName={clinicInfo?.name}
         clinicLogo={clinicInfo?.logo}
         showLanguageSelector={languages.length > 1}
-        currentLanguage={selectedLanguage}
+        currentLanguage={currentLanguage}
         availableLanguages={languages}
         onLanguageChange={handleLanguageSelect}
       />
@@ -78,7 +78,7 @@ const Welcome: React.FC = () => {
       <div className="kiosk-content">
         <div className="flex-1 flex flex-col justify-center items-center space-y-8 min-h-0">
           <div className="text-center max-w-3xl">
-            <Title>Welcome to our clinic!</Title>
+            <Title>{t('welcome.title', 'Welcome to our clinic!')}</Title>
             
             <div className="mb-8">
               <Button 
@@ -87,7 +87,7 @@ const Welcome: React.FC = () => {
                 onClick={handleStartCheckIn}
                 className="shadow-lg"
               >
-                Tap to check-in
+                {t('welcome.checkInButton', 'Tap to check-in')}
               </Button>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Welcome: React.FC = () => {
           {languages.length > 1 && (
             <div className="w-full max-w-3xl">
               <h2 className="kiosk-h2 text-center text-muted-foreground mb-6">
-                Select your language
+                {t('welcome.selectLanguage', 'Select your language')}
               </h2>
               <div className="grid grid-cols-3 gap-4 justify-items-center">
                 {languages.map((language) => (
@@ -105,7 +105,7 @@ const Welcome: React.FC = () => {
                     flag={language.flag}
                     countryName={language.name}
                     languageName={language.name}
-                    selected={selectedLanguage === language.code}
+                    selected={currentLanguage === language.code}
                     onClick={() => handleLanguageSelect(language.code)}
                     className="w-40"
                   />

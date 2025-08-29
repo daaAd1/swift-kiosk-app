@@ -10,10 +10,12 @@ import Loader from '@/components/kiosk/Loader';
 import { KioskAPI, Appointment } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const ManualYear: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
   
   const [years, setYears] = useState<string[]>([]);
@@ -63,7 +65,7 @@ const ManualYear: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading available years..." />
+          <Loader text={t('loading.availableYears', 'Loading available years...')} />
         </div>
         <Footer />
       </div>
@@ -76,7 +78,7 @@ const ManualYear: React.FC = () => {
       
       <div className="kiosk-content">
         <BackButton onClick={handleBack} />
-        <Title>Enter the year in which you were born</Title>
+        <Title>{t('manual.year', 'Enter the year in which you were born')}</Title>
         
         <div className="flex-1 flex flex-col justify-center items-center space-y-4 w-full max-w-5xl mx-auto">
           <Keyboard
@@ -92,7 +94,7 @@ const ManualYear: React.FC = () => {
             onClick={handleContinue}
             disabled={!selectedYear}
           >
-            Continue
+            {t('button.continue', 'Continue')}
           </Button>
         </div>
       </div>

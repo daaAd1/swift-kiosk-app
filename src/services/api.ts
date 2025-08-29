@@ -87,6 +87,22 @@ const PLACEHOLDER_APPOINTMENT: Appointment = {
   isLate: false
 };
 
+const SAME_LETTER_APPOINTMENT: Appointment = {
+  id: "APT002",
+  patientName: "Alice A. Anderson",
+  patientForename: "Alice",
+  patientSurname: "Anderson",
+  doctorTitle: "Dr.",
+  doctorForename: "Michael",
+  doctorSurname: "Brown",
+  startTime: "16:15",
+  location: {
+    address: "Building A, Floor 1, Room 108",
+    phone: "+1 (555) 123-4567"
+  },
+  isLate: false
+};
+
 const PLACEHOLDER_CONTACT: ContactInfo = {
   email: "john.doe@email.com",
   phone: "+1 (555) 987-6543",
@@ -164,7 +180,27 @@ export class KioskAPI {
   // Appointment filtering and verification
   static async findAppointments(filters: PatientFilters): Promise<{ appointments: Appointment[], isFiltered: boolean }> {
     await delay(300);
-    // Simulate appointment filtering
+    
+    // Special case: if forename and surname initials are the same, return the special appointment
+    if (filters.forenameInitial && filters.surnameInitial && 
+        filters.forenameInitial === filters.surnameInitial) {
+      
+      // Create a dynamic appointment based on the selected letter
+      const selectedLetter = filters.forenameInitial;
+      const dynamicAppointment: Appointment = {
+        ...SAME_LETTER_APPOINTMENT,
+        patientName: `${selectedLetter}lexander ${selectedLetter}. ${selectedLetter}nderson`,
+        patientForename: `${selectedLetter}lexander`,
+        patientSurname: `${selectedLetter}nderson`
+      };
+      
+      return {
+        appointments: [dynamicAppointment],
+        isFiltered: true // Always consider it filtered when we find the same letter match
+      };
+    }
+    
+    // Default behavior for other cases
     return {
       appointments: [PLACEHOLDER_APPOINTMENT],
       isFiltered: Object.keys(filters).length >= 3 // Filtered when we have enough criteria

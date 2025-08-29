@@ -93,8 +93,8 @@ const UpdatePhone: React.FC = () => {
         <Title>{t('contact.updatePhone', 'Update Phone Number')}</Title>
         
         <div className="flex-1 flex flex-col justify-between py-2">
-          {/* Phone Input Display */}
-          <div className="flex items-center justify-center mb-4">
+          {/* Phone Input Display with Confirm Button */}
+          <div className="flex items-center justify-center mb-4 space-x-4">
             <div className="bg-card border-2 border-border rounded-lg p-2 w-full max-w-md">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary" />
@@ -115,6 +115,15 @@ const UpdatePhone: React.FC = () => {
                 </Button>
               </div>
             </div>
+            <Button
+              variant="success"
+              size="lg"
+              onClick={handleSave}
+              disabled={!phone.trim()}
+              showArrow
+            >
+              {t('button.confirm', 'Confirm')}
+            </Button>
           </div>
 
           {/* Compact Number Keyboard */}
@@ -152,19 +161,6 @@ const UpdatePhone: React.FC = () => {
                 </Button>
               </div>
             </div>
-          </div>
-
-          {/* Confirm Button */}
-          <div className="text-center">
-            <Button
-              variant="success"
-              size="lg"
-              onClick={handleSave}
-              disabled={!phone.trim()}
-              showArrow
-            >
-              {t('button.confirm', 'Confirm')}
-            </Button>
           </div>
         </div>
       </div>

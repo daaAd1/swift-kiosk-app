@@ -94,8 +94,8 @@ const UpdateEmail: React.FC = () => {
         <Title>{t('contact.updateEmail', 'Update Email Address')}</Title>
         
         <div className="flex-1 flex flex-col justify-between py-2">
-          {/* Email Input Display */}
-          <div className="flex items-center justify-center mb-4">
+          {/* Email Input Display with Confirm Button */}
+          <div className="flex items-center justify-center mb-4 space-x-4">
             <div className="bg-card border-2 border-border rounded-lg p-2 w-full max-w-md">
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary" />
@@ -116,6 +116,15 @@ const UpdateEmail: React.FC = () => {
                 </Button>
               </div>
             </div>
+            <Button
+              variant="success"
+              size="lg"
+              onClick={handleSave}
+              disabled={!email.trim()}
+              showArrow
+            >
+              {t('button.confirm', 'Confirm')}
+            </Button>
           </div>
 
           {/* Keyboard Mode Switcher */}
@@ -172,19 +181,6 @@ const UpdateEmail: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Confirm Button */}
-          <div className="text-center">
-            <Button
-              variant="success"
-              size="lg"
-              onClick={handleSave}
-              disabled={!email.trim()}
-              showArrow
-            >
-              {t('button.confirm', 'Confirm')}
-            </Button>
           </div>
         </div>
       </div>

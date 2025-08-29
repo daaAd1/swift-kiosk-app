@@ -17,7 +17,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
 }) => {
   return (
     <div 
-      className={`grid gap-4 ${className}`}
+      className={`grid gap-3 w-full max-w-4xl ${className}`}
       style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
     >
       {options.map((option) => (
@@ -26,7 +26,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
           onClick={() => onSelect(option)}
           className={`
             kiosk-interactive kiosk-touch-target
-            bg-card border-2 rounded-lg p-4 shadow-sm
+            bg-card border-2 rounded-lg p-3 shadow-sm
             hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
             ${selectedOption === option ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}
           `}

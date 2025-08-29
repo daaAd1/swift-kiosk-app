@@ -78,7 +78,7 @@ const ManualMonth: React.FC = () => {
         <BackButton onClick={handleBack} />
         <Title>Enter the month in which you were born</Title>
         
-        <div className="flex-1 flex flex-col justify-center items-center space-y-6">
+        <div className="flex-1 flex flex-col justify-center items-center space-y-4 w-full max-w-4xl mx-auto">
           <Keyboard
             options={months}
             onSelect={setSelectedMonth}

@@ -78,7 +78,7 @@ const ManualDay: React.FC = () => {
         <BackButton onClick={handleBack} />
         <Title>Enter the day in which you were born</Title>
         
-        <div className="flex-1 flex flex-col justify-center items-center space-y-6">
+        <div className="flex-1 flex flex-col justify-center items-center space-y-4 w-full max-w-5xl mx-auto">
           <Keyboard
             options={days}
             onSelect={setSelectedDay}

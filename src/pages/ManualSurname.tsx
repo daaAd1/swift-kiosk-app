@@ -94,13 +94,13 @@ const ManualSurname: React.FC = () => {
         <BackButton />
         <Title>Enter the first letter of your surname</Title>
         
-        <div className="flex-1 flex flex-col justify-center space-y-8">
+        <div className="flex-1 flex flex-col justify-center space-y-4">
           <Keyboard
             options={availableLetters}
             onSelect={handleLetterSelect}
             selectedOption={selectedLetter}
             columns={6}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto"
           />
           
           <div className="text-center">

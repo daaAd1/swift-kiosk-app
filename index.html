@@ -3,21 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>swift-kiosk-app</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>KIOSK - Hospital Patient Check-In System</title>
+    <meta name="description" content="Modern touchscreen kiosk system for hospital patient check-in. Streamline your appointment process with our user-friendly interface." />
+    <meta name="author" content="KIOSK Medical Systems" />
+    <meta name="keywords" content="hospital kiosk, patient check-in, medical appointment, healthcare technology, touchscreen interface" />
 
-    <meta property="og:title" content="swift-kiosk-app" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:title" content="KIOSK - Hospital Patient Check-In System" />
+    <meta property="og:description" content="Modern touchscreen kiosk system for hospital patient check-in. Streamline your appointment process with our user-friendly interface." />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:title" content="KIOSK - Hospital Patient Check-In System" />
+    <meta name="twitter:description" content="Modern touchscreen kiosk system for hospital patient check-in. Streamline your appointment process with our user-friendly interface." />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Optimize for kiosk/touchscreen usage -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#4285f4">
   </head>
 
   <body>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        /* Disable text selection for kiosk interface */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        /* Disable context menu */
+        -webkit-touch-callout: none;
+        /* Disable highlight when touching */
+        -webkit-tap-highlight-color: transparent;
+        /* Optimize for touch */
+        touch-action: manipulation;
+      }
+    </style>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

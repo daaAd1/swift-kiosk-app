@@ -1,0 +1,125 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Header from '@/components/kiosk/Header';
+import Footer from '@/components/kiosk/Footer';
+import Title from '@/components/kiosk/Title';
+import BackButton from '@/components/kiosk/BackButton';
+import Button from '@/components/kiosk/Button';
+import Keyboard from '@/components/kiosk/Keyboard';
+import Loader from '@/components/kiosk/Loader';
+import { KioskAPI, PatientFilters } from '@/services/api';
+import { useCurrentTime } from '@/hooks/useCurrentTime';
+import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+
+const ManualSurname: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentTime = useCurrentTime();
+  const [availableLetters, setAvailableLetters] = useState<string[]>([]);
+  const [selectedLetter, setSelectedLetter] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+  const [continuing, setContinuing] = useState(false);
+  
+  const previousFilters = location.state?.filters as PatientFilters || {};
+  
+  useInactivityTimer();
+
+  useEffect(() => {
+    const loadAvailableLetters = async () => {
+      try {
+        const letters = await KioskAPI.getAvailableLetters('surname', previousFilters);
+        setAvailableLetters(letters);
+        setLoading(false);
+      } catch (error) {
+        console.error('Failed to load available letters:', error);
+        setLoading(false);
+      }
+    };
+
+    loadAvailableLetters();
+  }, []);
+
+  const handleLetterSelect = (letter: string) => {
+    setSelectedLetter(letter);
+  };
+
+  const handleContinue = async () => {
+    if (!selectedLetter) return;
+    
+    setContinuing(true);
+    try {
+      const filters: PatientFilters = { 
+        ...previousFilters, 
+        surnameInitial: selectedLetter 
+      };
+      const result = await KioskAPI.findAppointments(filters);
+      
+      if (result.isFiltered && result.appointments.length === 1) {
+        // Navigate to appointment confirmation
+        navigate('/appointment-confirm', { 
+          state: { 
+            appointment: result.appointments[0],
+            filters 
+          } 
+        });
+      } else {
+        // Continue to decade selection
+        navigate('/manual-decade', { 
+          state: { filters } 
+        });
+      }
+    } catch (error) {
+      console.error('Failed to filter appointments:', error);
+      setContinuing(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="kiosk-container">
+        <Header currentTime={currentTime} />
+        <div className="kiosk-content">
+          <Loader text="Loading available options..." />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="kiosk-container">
+      <Header currentTime={currentTime} />
+      
+      <div className="kiosk-content">
+        <BackButton />
+        <Title>Enter the first letter of your surname</Title>
+        
+        <div className="flex-1 flex flex-col justify-center space-y-8">
+          <Keyboard
+            options={availableLetters}
+            onSelect={handleLetterSelect}
+            selectedOption={selectedLetter}
+            columns={6}
+            className="max-w-4xl mx-auto"
+          />
+          
+          <div className="text-center">
+            <Button 
+              variant="primary" 
+              size="lg"
+              onClick={handleContinue}
+              disabled={!selectedLetter}
+              loading={continuing}
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default ManualSurname;

@@ -66,6 +66,7 @@ const translations: Translations = {
     'contact.updateEmail': 'Update Email Address',
     'contact.updatePhone': 'Update Phone Number',
     'button.save': 'Save',
+    'button.confirm': 'Confirm',
   },
   es: {
     'welcome.title': '¡Bienvenido a nuestra clínica!',
@@ -117,6 +118,7 @@ const translations: Translations = {
     'contact.updateEmail': 'Actualizar Dirección de Correo',
     'contact.updatePhone': 'Actualizar Número de Teléfono',
     'button.save': 'Guardar',
+    'button.confirm': 'Confirmar',
   },
   fr: {
     'welcome.title': 'Bienvenue dans notre clinique!',
@@ -168,6 +170,7 @@ const translations: Translations = {
     'contact.updateEmail': 'Mettre à jour l\'adresse e-mail',
     'contact.updatePhone': 'Mettre à jour le numéro de téléphone',
     'button.save': 'Enregistrer',
+    'button.confirm': 'Confirmer',
   },
   nl: {
     'welcome.title': 'Welkom in onze kliniek!',
@@ -219,6 +222,7 @@ const translations: Translations = {
     'contact.updateEmail': 'E-mailadres bijwerken',
     'contact.updatePhone': 'Telefoonnummer bijwerken',
     'button.save': 'Opslaan',
+    'button.confirm': 'Bevestigen',
   }
 };
 

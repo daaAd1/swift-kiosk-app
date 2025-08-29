@@ -161,7 +161,7 @@ const UpdatePhone: React.FC = () => {
               disabled={!phone.trim()}
               showArrow
             >
-              {t('button.save', 'Save')}
+              {t('button.confirm', 'Confirm')}
             </Button>
           </div>
         </div>

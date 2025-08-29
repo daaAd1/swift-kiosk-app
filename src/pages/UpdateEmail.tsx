@@ -181,7 +181,7 @@ const UpdateEmail: React.FC = () => {
               disabled={!email.trim()}
               showArrow
             >
-              {t('button.save', 'Save')}
+              {t('button.confirm', 'Confirm')}
             </Button>
           </div>
         </div>

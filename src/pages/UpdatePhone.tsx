@@ -92,17 +92,17 @@ const UpdatePhone: React.FC = () => {
         <BackButton onClick={handleBack} />
         <Title>{t('contact.updatePhone', 'Update Phone Number')}</Title>
         
-        <div className="flex-1 flex flex-col justify-center space-y-6">
+        <div className="flex-1 flex flex-col min-h-0 py-4">
           {/* Phone Input Display */}
           <div className="flex items-center justify-center mb-4">
-            <div className="bg-card border-2 border-border rounded-lg p-4 w-full max-w-2xl">
+            <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-2xl">
               <div className="flex items-center space-x-3">
-                <Phone className="h-6 w-6 text-primary" />
+                <Phone className="h-5 w-5 text-primary" />
                 <input
                   type="text"
                   value={phone}
                   readOnly
-                  className="flex-1 bg-transparent text-2xl font-medium text-foreground focus:outline-none"
+                  className="flex-1 bg-transparent text-xl font-medium text-foreground focus:outline-none"
                   placeholder="Enter your phone number..."
                 />
                 <Button
@@ -117,43 +117,45 @@ const UpdatePhone: React.FC = () => {
             </div>
           </div>
 
-          {/* Number Keyboard */}
-          <div className="w-full max-w-md mx-auto">
-            <div className="grid grid-cols-3 gap-4">
-              {numberRows.flat().map((key) => (
-                <button
-                  key={key}
-                  onClick={() => handleKeyPress(key)}
-                  className="w-20 h-16 bg-card border border-border rounded-lg hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-foreground text-2xl font-medium"
-                >
-                  {key}
-                </button>
-              ))}
-            </div>
+          {/* Number Keyboard - Centered and properly sized */}
+          <div className="flex-1 flex flex-col items-center justify-center min-h-0">
+            <div className="w-full max-w-sm mx-auto">
+              <div className="grid grid-cols-3 gap-3">
+                {numberRows.flat().map((key) => (
+                  <button
+                    key={key}
+                    onClick={() => handleKeyPress(key)}
+                    className="w-16 h-12 bg-card border border-border rounded-lg hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-foreground text-xl font-medium"
+                  >
+                    {key}
+                  </button>
+                ))}
+              </div>
 
-            {/* Special Action Buttons */}
-            <div className="flex justify-center space-x-4 mt-6">
-              <Button
-                variant="secondary"
-                size="lg"
-                onClick={handleAddPlus}
-                disabled={phone.startsWith('+')}
-              >
-                +
-              </Button>
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={handleAddPrefix}
-                disabled={phone.startsWith(getCountryPrefix())}
-              >
-                {getCountryPrefix()}
-              </Button>
+              {/* Special Action Buttons */}
+              <div className="flex justify-center space-x-3 mt-4">
+                <Button
+                  variant="secondary"
+                  size="default"
+                  onClick={handleAddPlus}
+                  disabled={phone.startsWith('+')}
+                >
+                  +
+                </Button>
+                <Button
+                  variant="primary"
+                  size="default"
+                  onClick={handleAddPrefix}
+                  disabled={phone.startsWith(getCountryPrefix())}
+                >
+                  {getCountryPrefix()}
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Save Button */}
-          <div className="text-center pt-4">
+          {/* Save Button - Fixed at bottom */}
+          <div className="text-center pt-3 pb-2">
             <Button
               variant="success"
               size="lg"

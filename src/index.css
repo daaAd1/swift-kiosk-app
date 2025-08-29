@@ -75,11 +75,11 @@
     /* Kiosk-specific design tokens */
     --kiosk-shadow: 0 4px 20px -4px rgb(0 0 0 / 0.1);
     --kiosk-shadow-lg: 0 8px 32px -8px rgb(0 0 0 / 0.15);
-    --kiosk-touch-target: 64px;
-    --kiosk-spacing-section: 48px;
-    --kiosk-spacing-content: 32px;
-    --kiosk-header-height: 80px;
-    --kiosk-footer-height: 72px;
+    --kiosk-touch-target: 56px;
+    --kiosk-spacing-section: 32px;
+    --kiosk-spacing-content: 24px;
+    --kiosk-header-height: 72px;
+    --kiosk-footer-height: 64px;
   }
 
   .dark {
@@ -149,20 +149,24 @@
     @apply text-base leading-relaxed;
   }
 
-  /* Touch-optimized layouts */
+  /* Touch-optimized layouts - Fixed for 1366x768 */
   .kiosk-container {
     @apply min-h-screen flex flex-col;
-    width: 1366px;
+    width: 100vw;
     max-width: 1366px;
+    height: 100vh;
+    max-height: 768px;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   .kiosk-content {
-    @apply flex-1 flex flex-col px-16 py-8;
+    @apply flex-1 flex flex-col px-12 py-4;
+    min-height: 0; /* Prevent flex item from growing beyond container */
   }
 
   .kiosk-section {
-    @apply mb-12;
+    @apply mb-8;
   }
 
   .kiosk-touch-target {

@@ -24,8 +24,8 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-card border-b border-border shadow-sm" style={{ height: 'var(--kiosk-header-height)' }}>
-      <div className="kiosk-container">
-        <div className="flex items-center justify-between h-full px-16">
+      <div className="w-full h-full">
+        <div className="flex items-center justify-between h-full px-12">
           {/* Logo and Clinic Name */}
           <div className="flex items-center space-x-6">
             {clinicLogo && (

@@ -34,21 +34,21 @@ const Card: React.FC<CardProps> = ({
       `}
       onClick={onClick}
     >
-      <div className="p-8">
+      <div className="p-6">
         {/* Image or Icon */}
         {image && (
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-4">
             <img 
               src={image} 
               alt={title}
-              className="w-20 h-20 object-contain"
+              className="w-16 h-16 object-contain"
             />
           </div>
         )}
         
         {icon && (
-          <div className="flex justify-center mb-6 text-primary">
-            <div className="w-20 h-20 flex items-center justify-center">
+          <div className="flex justify-center mb-4 text-primary">
+            <div className="w-16 h-16 flex items-center justify-center">
               {icon}
             </div>
           </div>

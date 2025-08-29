@@ -76,14 +76,14 @@ const Welcome: React.FC = () => {
       />
       
       <div className="kiosk-content">
-        <div className="flex-1 flex flex-col justify-center items-center space-y-12">
-          <div className="text-center max-w-4xl">
+        <div className="flex-1 flex flex-col justify-center items-center space-y-8 min-h-0">
+          <div className="text-center max-w-3xl">
             <Title>Welcome to our clinic!</Title>
             
-            <div className="mb-12">
+            <div className="mb-8">
               <Button 
                 variant="primary" 
-                size="xl"
+                size="lg"
                 onClick={handleStartCheckIn}
                 className="shadow-lg"
               >
@@ -94,11 +94,11 @@ const Welcome: React.FC = () => {
 
           {/* Language Selection */}
           {languages.length > 1 && (
-            <div className="w-full max-w-4xl">
-              <h2 className="kiosk-h2 text-center text-muted-foreground mb-8">
+            <div className="w-full max-w-3xl">
+              <h2 className="kiosk-h2 text-center text-muted-foreground mb-6">
                 Select your language
               </h2>
-              <div className="grid grid-cols-3 gap-6 justify-items-center">
+              <div className="grid grid-cols-3 gap-4 justify-items-center">
                 {languages.map((language) => (
                   <LanguageCard
                     key={language.code}
@@ -107,7 +107,7 @@ const Welcome: React.FC = () => {
                     languageName={language.name}
                     selected={selectedLanguage === language.code}
                     onClick={() => handleLanguageSelect(language.code)}
-                    className="w-48"
+                    className="w-40"
                   />
                 ))}
               </div>

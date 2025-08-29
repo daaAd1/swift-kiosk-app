@@ -37,13 +37,15 @@ const VerifyContact: React.FC = () => {
   };
 
   const handleUpdateEmail = () => {
-    // This would open an email update modal/screen
-    console.log('Update email requested');
+    navigate('/update-email', {
+      state: { appointment, contactInfo }
+    });
   };
 
   const handleUpdatePhone = () => {
-    // This would open a phone update modal/screen
-    console.log('Update phone requested');
+    navigate('/update-phone', {
+      state: { appointment, contactInfo }
+    });
   };
 
   if (!appointment || !contactInfo) {
@@ -60,7 +62,7 @@ const VerifyContact: React.FC = () => {
         <Title>{t('contact.verify', 'Verify your contact details')}</Title>
         
         <div className="flex-1 flex flex-col justify-center">
-          <div className="max-w-3xl mx-auto space-y-6 mb-8">
+          <div className="max-w-3xl mx-auto space-y-8 mb-12">
             {contactInfo.email && (
               <ContactInfoCard
                 type="email"

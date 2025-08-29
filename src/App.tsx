@@ -20,6 +20,8 @@ import AppointmentNotFound from "./pages/AppointmentNotFound";
 import AppointmentDifferentLocation from "./pages/AppointmentDifferentLocation";
 import WelcomeFinal from "./pages/WelcomeFinal";
 import VerifyContact from "./pages/VerifyContact";
+import UpdateEmail from "./pages/UpdateEmail";
+import UpdatePhone from "./pages/UpdatePhone";
 import WeCallYouSoon from "./pages/WeCallYouSoon";
 import SorryDelay from "./pages/SorryDelay";
 import PatientLate from "./pages/PatientLate";
@@ -45,6 +47,8 @@ const App = () => (
             <Route path="/appointment-not-found" element={<AppointmentNotFound />} />
             <Route path="/welcome-final" element={<WelcomeFinal />} />
             <Route path="/verify-contact" element={<VerifyContact />} />
+            <Route path="/update-email" element={<UpdateEmail />} />
+            <Route path="/update-phone" element={<UpdatePhone />} />
             <Route path="/we-call-you-soon" element={<WeCallYouSoon />} />
             
             {/* Placeholder routes for remaining screens - to be implemented */}

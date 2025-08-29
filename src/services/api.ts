@@ -120,26 +120,45 @@ export class KioskAPI {
     return ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   }
 
-  static async getAvailableDecades(filters: PatientFilters): Promise<string[]> {
+  static async getAvailableDecades(): Promise<string[]> {
     await delay(300);
     return ['1940s', '1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s'];
   }
 
-  static async getAvailableYears(decade: string, filters: PatientFilters): Promise<string[]> {
+  static async getAvailableYears(): Promise<string[]> {
     await delay(300);
-    const baseYear = parseInt(decade.substring(0, 4));
-    return Array.from({ length: 10 }, (_, i) => (baseYear + i).toString());
+    return ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999'];
   }
 
-  static async getAvailableMonths(filters: PatientFilters): Promise<string[]> {
+  static async getAvailableMonths(): Promise<string[]> {
     await delay(300);
     return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   }
 
-  static async getAvailableDays(month: string, year: string, filters: PatientFilters): Promise<string[]> {
+  static async getAvailableDays(): Promise<string[]> {
     await delay(300);
-    const daysInMonth = new Date(parseInt(year), ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(month) + 1, 0).getDate();
-    return Array.from({ length: daysInMonth }, (_, i) => (i + 1).toString());
+    return Array.from({ length: 31 }, (_, i) => (i + 1).toString());
+  }
+
+  // Filter methods for manual check-in
+  static async filterByDecade(decade: string): Promise<{ appointmentFound: boolean }> {
+    await delay(300);
+    return { appointmentFound: Math.random() > 0.7 };
+  }
+
+  static async filterByYear(year: string): Promise<{ appointmentFound: boolean }> {
+    await delay(300);
+    return { appointmentFound: Math.random() > 0.7 };
+  }
+
+  static async filterByMonth(month: string): Promise<{ appointmentFound: boolean }> {
+    await delay(300);
+    return { appointmentFound: Math.random() > 0.7 };
+  }
+
+  static async filterByDay(day: string): Promise<{ appointmentFound: boolean }> {
+    await delay(300);
+    return { appointmentFound: Math.random() > 0.5 };
   }
 
   // Appointment filtering and verification
@@ -152,9 +171,9 @@ export class KioskAPI {
     };
   }
 
-  static async getAppointmentDetails(appointmentId: string): Promise<Appointment | null> {
+  static async getAppointmentDetails(): Promise<Appointment> {
     await delay(300);
-    return appointmentId === PLACEHOLDER_APPOINTMENT.id ? PLACEHOLDER_APPOINTMENT : null;
+    return PLACEHOLDER_APPOINTMENT;
   }
 
   // Check-in process

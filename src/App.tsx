@@ -11,11 +11,19 @@ import CheckIn from "./pages/CheckIn";
 import EidCard from "./pages/EidCard";
 import ManualForename from "./pages/ManualForename";
 import ManualSurname from "./pages/ManualSurname";
+import ManualDecade from "./pages/ManualDecade";
+import ManualYear from "./pages/ManualYear";
+import ManualMonth from "./pages/ManualMonth";
+import ManualDay from "./pages/ManualDay";
 import AppointmentConfirm from "./pages/AppointmentConfirm";
 import AppointmentNotFound from "./pages/AppointmentNotFound";
+import AppointmentDifferentLocation from "./pages/AppointmentDifferentLocation";
 import WelcomeFinal from "./pages/WelcomeFinal";
 import VerifyContact from "./pages/VerifyContact";
 import WeCallYouSoon from "./pages/WeCallYouSoon";
+import SorryDelay from "./pages/SorryDelay";
+import PatientLate from "./pages/PatientLate";
+import EidWarning from "./pages/EidWarning";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,14 +48,14 @@ const App = () => (
             <Route path="/we-call-you-soon" element={<WeCallYouSoon />} />
             
             {/* Placeholder routes for remaining screens - to be implemented */}
-            <Route path="/manual-decade" element={<div>Manual Decade - Coming Soon</div>} />
-            <Route path="/manual-year" element={<div>Manual Year - Coming Soon</div>} />
-            <Route path="/manual-month" element={<div>Manual Month - Coming Soon</div>} />
-            <Route path="/manual-day" element={<div>Manual Day - Coming Soon</div>} />
-            <Route path="/appointment-different-location" element={<div>Different Location - Coming Soon</div>} />
-            <Route path="/sorry-delay" element={<div>Sorry for Delay - Coming Soon</div>} />
-            <Route path="/patient-late" element={<div>Patient Late - Coming Soon</div>} />
-            <Route path="/eid-warning" element={<div>eID Warning - Coming Soon</div>} />
+            <Route path="/manual-decade" element={<ManualDecade />} />
+            <Route path="/manual-year" element={<ManualYear />} />
+            <Route path="/manual-month" element={<ManualMonth />} />
+            <Route path="/manual-day" element={<ManualDay />} />
+            <Route path="/appointment-different-location" element={<AppointmentDifferentLocation />} />
+            <Route path="/sorry-delay" element={<SorryDelay />} />
+            <Route path="/patient-late" element={<PatientLate />} />
+            <Route path="/eid-warning" element={<EidWarning />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

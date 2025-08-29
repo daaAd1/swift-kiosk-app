@@ -8,11 +8,13 @@ import ContactInfoCard from '@/components/kiosk/ContactInfoCard';
 import { Appointment as AppointmentType, ContactInfo } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const VerifyContact: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const [processing, setProcessing] = useState(false);
   
   const appointment = location.state?.appointment as AppointmentType;
@@ -55,14 +57,14 @@ const VerifyContact: React.FC = () => {
       <Header currentTime={currentTime} />
       
       <div className="kiosk-content">
-        <Title>Verify your contact details</Title>
+        <Title>{t('contact.verify', 'Verify your contact details')}</Title>
         
         <div className="flex-1 flex flex-col justify-center">
           <div className="max-w-3xl mx-auto space-y-6 mb-8">
             {contactInfo.email && (
               <ContactInfoCard
                 type="email"
-                label="Email address"
+                label={t('contact.email', 'Email address')}
                 value={contactInfo.email}
                 onUpdate={handleUpdateEmail}
               />
@@ -71,7 +73,7 @@ const VerifyContact: React.FC = () => {
             {contactInfo.phone && (
               <ContactInfoCard
                 type="phone"
-                label="Phone number"
+                label={t('contact.phone', 'Phone number')}
                 value={contactInfo.phone}
                 onUpdate={handleUpdatePhone}
               />
@@ -87,7 +89,7 @@ const VerifyContact: React.FC = () => {
                 loading={processing}
                 showArrow
               >
-                This is correct
+                {t('button.thisIsCorrect', 'This is correct')}
               </Button>
             </div>
           )}

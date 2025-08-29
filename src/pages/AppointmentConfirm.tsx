@@ -9,11 +9,13 @@ import Appointment from '@/components/kiosk/Appointment';
 import { KioskAPI, Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const AppointmentConfirm: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const [processing, setProcessing] = useState(false);
   
   const appointment = location.state?.appointment as AppointmentType;
@@ -87,7 +89,7 @@ const AppointmentConfirm: React.FC = () => {
       <div className="kiosk-content">
         <div className="text-center mb-8">
           <CheckCircle className="h-20 w-20 text-success mx-auto mb-6" />
-          <Title>Is this your appointment?</Title>
+          <Title>{t('appointment.confirm', 'Is this your appointment?')}</Title>
         </div>
         
         <div className="flex-1 flex flex-col justify-center">
@@ -105,7 +107,7 @@ const AppointmentConfirm: React.FC = () => {
               onClick={handleReject}
               disabled={processing}
             >
-              No
+              {t('button.no', 'No')}
             </Button>
             <Button 
               variant="success" 
@@ -114,7 +116,7 @@ const AppointmentConfirm: React.FC = () => {
               loading={processing}
               showArrow
             >
-              This is correct
+              {t('button.thisIsCorrect', 'This is correct')}
             </Button>
           </div>
         </div>

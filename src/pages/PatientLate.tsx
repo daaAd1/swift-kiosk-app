@@ -12,10 +12,12 @@ import { KioskAPI, Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const PatientLate: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
   
   const [appointment, setAppointment] = useState<AppointmentType | null>(null);
@@ -48,7 +50,7 @@ const PatientLate: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading appointment details..." />
+          <Loader text={t('loading.pleaseWait', 'Please wait...')} />
         </div>
         <Footer />
       </div>
@@ -63,11 +65,11 @@ const PatientLate: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
           <AlertCircle className="h-20 w-20 text-danger" />
           
-          <Title>We notice you arrived late on your appointment.</Title>
+          <Title>{t('appointment.patientLate', 'We notice you arrived late on your appointment.')}</Title>
           
           <div className="max-w-2xl">
             <Text variant="large" center>
-              Please report to an assistant at the frontdesk. Thank you!
+              {t('appointment.patientLateText', 'Please report to an assistant at the front desk. Thank you!')}
             </Text>
           </div>
 
@@ -90,7 +92,7 @@ const PatientLate: React.FC = () => {
             onClick={handleOK}
             countdown={countdown}
           >
-            OK
+            {t('button.ok', 'OK')}
           </Button>
         </div>
       </div>

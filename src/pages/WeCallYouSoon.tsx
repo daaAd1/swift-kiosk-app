@@ -10,11 +10,13 @@ import Appointment from '@/components/kiosk/Appointment';
 import { Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const WeCallYouSoon: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const appointment = location.state?.appointment as AppointmentType;
   const { count, start } = useCountdown(8, () => navigate('/'));
 
@@ -40,13 +42,11 @@ const WeCallYouSoon: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center max-w-4xl mx-auto">
           <Clock className="h-24 w-24 text-primary mb-8" />
           
-          <Title>We'll call you soon</Title>
+          <Title>{t('final.weCallSoon', "We'll call you soon")}</Title>
           
           <div className="mb-8">
             <Text variant="large" center>
-              We have noted your arrival, and your appointment is scheduled. Please take a coffee 
-              and have a seat in the waiting room until you are called for your appointment. 
-              It will be anytime soon!
+              {t('final.weCallSoonText', 'We have noted your arrival, and your appointment is scheduled. Please take a coffee and have a seat in the waiting room until you are called for your appointment. It will be anytime soon!')}
             </Text>
           </div>
 
@@ -65,7 +65,7 @@ const WeCallYouSoon: React.FC = () => {
           countdown={count}
           onClick={() => navigate('/')}
         >
-          OK
+          {t('button.ok', 'OK')}
         </Button>
       </div>
     </div>

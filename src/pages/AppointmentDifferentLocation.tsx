@@ -12,10 +12,12 @@ import { KioskAPI, Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const AppointmentDifferentLocation: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
   
   const [appointment, setAppointment] = useState<AppointmentType | null>(null);
@@ -48,7 +50,7 @@ const AppointmentDifferentLocation: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading appointment details..." />
+          <Loader text={t('loading.pleaseWait', 'Please wait...')} />
         </div>
         <Footer />
       </div>
@@ -63,11 +65,11 @@ const AppointmentDifferentLocation: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
           <AlertTriangle className="h-20 w-20 text-danger" />
           
-          <Title>Your appointment is at a different location</Title>
+          <Title>{t('appointment.differentLocation', 'Your appointment is at a different location')}</Title>
           
           <div className="max-w-2xl">
             <Text variant="large" center>
-              If you can't arrive on time, please call {appointment?.location?.phone || 'the clinic'}.
+              {t('appointment.differentLocationText', "If you can't arrive on time, please call X.")}
             </Text>
           </div>
 
@@ -91,7 +93,7 @@ const AppointmentDifferentLocation: React.FC = () => {
             onClick={handleOK}
             countdown={countdown}
           >
-            OK
+            {t('button.ok', 'OK')}
           </Button>
         </div>
       </div>

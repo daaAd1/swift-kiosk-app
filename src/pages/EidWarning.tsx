@@ -12,10 +12,12 @@ import { KioskAPI, Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const EidWarning: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
   
   const [appointment, setAppointment] = useState<AppointmentType | null>(null);
@@ -48,7 +50,7 @@ const EidWarning: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading appointment details..." />
+          <Loader text={t('loading.pleaseWait', 'Please wait...')} />
         </div>
         <Footer />
       </div>
@@ -63,11 +65,11 @@ const EidWarning: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
           <AlertTriangle className="h-20 w-20 text-warning" />
           
-          <Title>Please report to an assistant at the frontdesk.</Title>
+          <Title>{t('final.eidWarning', 'Please report to an assistant at the front desk.')}</Title>
           
           <div className="max-w-2xl">
             <Text variant="large" center>
-              Your eID has not been registered in our system.
+              {t('final.eidWarningText', 'Your eID has not been registered in our system.')}
             </Text>
           </div>
 
@@ -90,7 +92,7 @@ const EidWarning: React.FC = () => {
             onClick={handleOK}
             countdown={countdown}
           >
-            OK
+            {t('button.ok', 'OK')}
           </Button>
         </div>
       </div>

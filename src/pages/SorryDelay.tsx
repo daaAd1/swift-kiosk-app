@@ -12,10 +12,12 @@ import { KioskAPI, Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useInactivityTimer } from '@/hooks/useInactivityTimer';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const SorryDelay: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   useInactivityTimer();
   
   const [appointment, setAppointment] = useState<AppointmentType | null>(null);
@@ -48,7 +50,7 @@ const SorryDelay: React.FC = () => {
       <div className="kiosk-container">
         <Header currentTime={currentTime} />
         <div className="kiosk-content">
-          <Loader text="Loading appointment details..." />
+          <Loader text={t('loading.pleaseWait', 'Please wait...')} />
         </div>
         <Footer />
       </div>
@@ -63,13 +65,11 @@ const SorryDelay: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
           <Clock className="h-20 w-20 text-warning" />
           
-          <Title>We are sorry for the delay.</Title>
+          <Title>{t('final.delayTitle', 'We are sorry for the delay.')}</Title>
           
           <div className="max-w-3xl">
             <Text variant="large" center>
-              It takes a bit longer than expected to prepare for your treatment. 
-              Please take a coffee and have a seat in the waiting room until you are called for your appointment. 
-              It will be anytime soon!
+              {t('final.delayText', 'It takes a bit longer than expected to prepare for your treatment. Please take a coffee and have a seat in the waiting room until you are called for your appointment. It will be anytime soon!')}
             </Text>
           </div>
 
@@ -90,7 +90,7 @@ const SorryDelay: React.FC = () => {
             onClick={handleOK}
             countdown={countdown}
           >
-            OK
+            {t('button.ok', 'OK')}
           </Button>
         </div>
       </div>

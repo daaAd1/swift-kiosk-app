@@ -8,10 +8,12 @@ import Button from '@/components/kiosk/Button';
 import Text from '@/components/kiosk/Text';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const AppointmentNotFound: React.FC = () => {
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const { count, start } = useCountdown(8, () => navigate('/'));
 
   useEffect(() => {
@@ -26,11 +28,11 @@ const AppointmentNotFound: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center max-w-3xl mx-auto">
           <AlertTriangle className="h-24 w-24 text-danger mb-8" />
           
-          <Title>We couldn't find your appointment</Title>
+          <Title>{t('appointment.notFound', "We couldn't find your appointment")}</Title>
           
           <div className="mb-12">
             <Text variant="large" center>
-              Please report to an assistant at the front desk.
+              {t('appointment.notFoundText', 'Please report to an assistant at the front desk.')}
             </Text>
           </div>
         </div>
@@ -45,7 +47,7 @@ const AppointmentNotFound: React.FC = () => {
           countdown={count}
           onClick={() => navigate('/')}
         >
-          OK
+          {t('button.ok', 'OK')}
         </Button>
       </div>
     </div>

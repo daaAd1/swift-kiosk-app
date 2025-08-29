@@ -10,11 +10,13 @@ import Appointment from '@/components/kiosk/Appointment';
 import { Appointment as AppointmentType } from '@/services/api';
 import { useCurrentTime } from '@/hooks/useCurrentTime';
 import { useCountdown } from '@/hooks/useCountdown';
+import { useInternationalization } from '@/contexts/InternationalizationContext';
 
 const WelcomeFinal: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTime = useCurrentTime();
+  const { t } = useInternationalization();
   const appointment = location.state?.appointment as AppointmentType;
   const { count, start } = useCountdown(8, () => navigate('/'));
 
@@ -40,11 +42,11 @@ const WelcomeFinal: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center text-center max-w-4xl mx-auto">
           <CheckCircle className="h-24 w-24 text-success mb-8" />
           
-          <Title>Welcome, {appointment.patientForename}!</Title>
+          <Title>{t('final.welcome', 'Welcome')}, {appointment.patientForename}!</Title>
           
           <div className="mb-8">
             <Text variant="large" center>
-              Please take a seat in the waiting room until you are called for your appointment.
+              {t('final.welcomeText', 'Please take a seat in the waiting room until you are called for your appointment.')}
             </Text>
           </div>
 
@@ -63,7 +65,7 @@ const WelcomeFinal: React.FC = () => {
           countdown={count}
           onClick={() => navigate('/')}
         >
-          OK
+          {t('button.ok', 'OK')}
         </Button>
       </div>
     </div>

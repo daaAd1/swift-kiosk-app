@@ -78,6 +78,7 @@ const AppointmentDifferentLocation: React.FC = () => {
                 showLocation={true}
                 showWarning={true}
                 warningMessage={`Different location: ${appointment.location?.address}`}
+                centered
               />
             </div>
           )}

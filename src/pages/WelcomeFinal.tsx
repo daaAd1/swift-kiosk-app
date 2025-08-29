@@ -49,7 +49,7 @@ const WelcomeFinal: React.FC = () => {
           </div>
 
           <div className="w-full max-w-3xl mb-8">
-            <Appointment appointment={appointment} />
+            <Appointment appointment={appointment} centered />
           </div>
         </div>
       </div>

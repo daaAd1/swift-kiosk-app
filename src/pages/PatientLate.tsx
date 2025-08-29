@@ -77,6 +77,7 @@ const PatientLate: React.FC = () => {
                 appointment={appointment}
                 showWarning={true}
                 warningMessage="Patient arrived late"
+                centered
               />
             </div>
           )}

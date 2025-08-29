@@ -77,6 +77,7 @@ const EidWarning: React.FC = () => {
                 appointment={appointment}
                 showWarning={true}
                 warningMessage="eID not registered"
+                centered
               />
             </div>
           )}

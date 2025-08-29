@@ -8,6 +8,7 @@ interface AppointmentProps {
   showWarning?: boolean;
   warningMessage?: string;
   className?: string;
+  centered?: boolean;
 }
 
 const Appointment: React.FC<AppointmentProps> = ({
@@ -15,14 +16,15 @@ const Appointment: React.FC<AppointmentProps> = ({
   showLocation = false,
   showWarning = false,
   warningMessage,
-  className = ""
+  className = "",
+  centered = false
 }) => {
   return (
     <div className={`bg-card border border-border rounded-lg p-6 shadow-sm ${className}`}>
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
+      <div className={`${centered ? 'text-center' : 'flex items-start justify-between'}`}>
+        <div className={`${centered ? 'w-full' : 'flex-1'}`}>
           {/* Time and Warning */}
-          <div className="flex items-center space-x-4 mb-3">
+          <div className={`${centered ? 'flex flex-col items-center space-y-2' : 'flex items-center space-x-4'} mb-3`}>
             <div className="flex items-center space-x-2">
               <Clock className="h-5 w-5 text-primary" />
               <span className="text-xl font-semibold text-foreground">
@@ -39,7 +41,7 @@ const Appointment: React.FC<AppointmentProps> = ({
           </div>
 
           {/* Patient and Doctor Info */}
-          <div className="space-y-2">
+          <div className={`space-y-2 ${centered ? 'text-center' : ''}`}>
             <div>
               <span className="text-muted-foreground">Patient: </span>
               <span className="font-semibold text-foreground text-lg">
@@ -56,8 +58,8 @@ const Appointment: React.FC<AppointmentProps> = ({
 
           {/* Location Info */}
           {showLocation && (
-            <div className="mt-4 pt-4 border-t border-border space-y-2">
-              <div className="flex items-start space-x-2">
+            <div className={`mt-4 pt-4 border-t border-border space-y-2 ${centered ? 'text-center' : ''}`}>
+              <div className={`flex items-start space-x-2 ${centered ? 'justify-center' : ''}`}>
                 <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
                 <div>
                   <div className="font-medium text-foreground">
@@ -65,7 +67,7 @@ const Appointment: React.FC<AppointmentProps> = ({
                   </div>
                 </div>
               </div>
-              <div className="flex items-center space-x-2 ml-7">
+              <div className={`flex items-center space-x-2 ${centered ? 'justify-center' : 'ml-7'}`}>
                 <Phone className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">
                   {appointment.location.phone}
@@ -76,7 +78,7 @@ const Appointment: React.FC<AppointmentProps> = ({
 
           {/* Late Info */}
           {appointment.isLate && appointment.minutesLate && (
-            <div className="mt-3 flex items-center space-x-2 text-danger">
+            <div className={`mt-3 flex items-center space-x-2 text-danger ${centered ? 'justify-center' : ''}`}>
               <AlertTriangle className="h-5 w-5" />
               <span className="font-medium">
                 You arrived {appointment.minutesLate} minutes late

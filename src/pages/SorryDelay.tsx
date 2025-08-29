@@ -77,6 +77,7 @@ const SorryDelay: React.FC = () => {
             <div className="w-full max-w-3xl">
               <Appointment
                 appointment={appointment}
+                centered
               />
             </div>
           )}

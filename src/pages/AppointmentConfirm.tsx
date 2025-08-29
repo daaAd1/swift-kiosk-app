@@ -20,6 +20,7 @@ const AppointmentConfirm: React.FC = () => {
   
   const appointment = location.state?.appointment as AppointmentType;
   const fromEid = location.state?.fromEid as boolean;
+  const fromManualAA = location.state?.fromManualAA as boolean;
   
   useInactivityTimer();
 
@@ -43,6 +44,23 @@ const AppointmentConfirm: React.FC = () => {
       try {
         await KioskAPI.performCheckIn(appointment.id);
         navigate('/patient-late', { state: { appointment } });
+      } catch (error) {
+        console.error('Failed to perform check-in:', error);
+        setProcessing(false);
+      }
+      return;
+    }
+    
+    // If appointment came from manual A+A flow, always show contact verification
+    if (fromManualAA) {
+      try {
+        const result = await KioskAPI.performCheckIn(appointment.id);
+        navigate('/verify-contact', { 
+          state: { 
+            appointment, 
+            contactInfo: result.contactInfo 
+          } 
+        });
       } catch (error) {
         console.error('Failed to perform check-in:', error);
         setProcessing(false);

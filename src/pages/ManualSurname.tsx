@@ -57,11 +57,15 @@ const ManualSurname: React.FC = () => {
       const result = await KioskAPI.findAppointments(filters);
       
       if (result.isFiltered && result.appointments.length === 1) {
+        // Check if this is the A+A case (both forename and surname are "A")
+        const isAACase = previousFilters.forenameInitial === 'A' && selectedLetter === 'A';
+        
         // Navigate to appointment confirmation
         navigate('/appointment-confirm', { 
           state: { 
             appointment: result.appointments[0],
-            filters 
+            filters,
+            fromManualAA: isAACase
           } 
         });
       } else {

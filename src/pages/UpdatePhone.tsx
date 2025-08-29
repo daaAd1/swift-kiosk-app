@@ -92,17 +92,17 @@ const UpdatePhone: React.FC = () => {
         <BackButton onClick={handleBack} />
         <Title>{t('contact.updatePhone', 'Update Phone Number')}</Title>
         
-        <div className="flex-1 flex flex-col min-h-0 py-4">
+        <div className="flex-1 flex flex-col justify-between py-2">
           {/* Phone Input Display */}
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-2xl">
+          <div className="flex items-center justify-center">
+            <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-xl">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary" />
                 <input
                   type="text"
                   value={phone}
                   readOnly
-                  className="flex-1 bg-transparent text-xl font-medium text-foreground focus:outline-none"
+                  className="flex-1 bg-transparent text-lg font-medium text-foreground focus:outline-none"
                   placeholder="Enter your phone number..."
                 />
                 <Button
@@ -117,15 +117,15 @@ const UpdatePhone: React.FC = () => {
             </div>
           </div>
 
-          {/* Number Keyboard - Centered and properly sized */}
-          <div className="flex-1 flex flex-col items-center justify-center min-h-0">
-            <div className="w-full max-w-sm mx-auto">
-              <div className="grid grid-cols-3 gap-3">
+          {/* Compact Number Keyboard */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="w-full max-w-xs">
+              <div className="grid grid-cols-3 gap-2">
                 {numberRows.flat().map((key) => (
                   <button
                     key={key}
                     onClick={() => handleKeyPress(key)}
-                    className="w-16 h-12 bg-card border border-border rounded-lg hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-foreground text-xl font-medium"
+                    className="w-16 h-12 bg-card border border-border rounded-lg hover:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground text-lg font-medium"
                   >
                     {key}
                   </button>
@@ -133,7 +133,7 @@ const UpdatePhone: React.FC = () => {
               </div>
 
               {/* Special Action Buttons */}
-              <div className="flex justify-center space-x-3 mt-4">
+              <div className="flex justify-center space-x-2 mt-3">
                 <Button
                   variant="secondary"
                   size="default"
@@ -154,8 +154,8 @@ const UpdatePhone: React.FC = () => {
             </div>
           </div>
 
-          {/* Save Button - Fixed at bottom */}
-          <div className="text-center pt-3 pb-2">
+          {/* Confirm Button */}
+          <div className="text-center">
             <Button
               variant="success"
               size="lg"

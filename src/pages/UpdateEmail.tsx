@@ -93,17 +93,17 @@ const UpdateEmail: React.FC = () => {
         <BackButton onClick={handleBack} />
         <Title>{t('contact.updateEmail', 'Update Email Address')}</Title>
         
-        <div className="flex-1 flex flex-col min-h-0 py-4">
+        <div className="flex-1 flex flex-col justify-between py-2">
           {/* Email Input Display */}
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-2xl">
+          <div className="flex items-center justify-center">
+            <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-xl">
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary" />
                 <input
                   type="text"
                   value={email}
                   readOnly
-                  className="flex-1 bg-transparent text-xl font-medium text-foreground focus:outline-none"
+                  className="flex-1 bg-transparent text-lg font-medium text-foreground focus:outline-none"
                   placeholder="Enter your email address..."
                 />
                 <Button
@@ -119,7 +119,7 @@ const UpdateEmail: React.FC = () => {
           </div>
 
           {/* Keyboard Mode Switcher */}
-          <div className="flex justify-center space-x-2 mb-3">
+          <div className="flex justify-center space-x-2">
             <Button
               variant={keyboardMode === 'letters' ? 'primary' : 'secondary'}
               size="sm"
@@ -143,9 +143,9 @@ const UpdateEmail: React.FC = () => {
             </Button>
           </div>
 
-          {/* Keyboard - Scrollable container */}
-          <div className="flex-1 flex flex-col items-center min-h-0">
-            <div className="w-full max-w-4xl mx-auto overflow-y-auto">
+          {/* Compact Keyboard */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="w-full max-w-3xl">
               <div className="space-y-1">
                 {getCurrentRows().map((row, rowIndex) => (
                   <div key={rowIndex} className="flex justify-center space-x-1">
@@ -153,7 +153,7 @@ const UpdateEmail: React.FC = () => {
                       <button
                         key={key}
                         onClick={() => handleKeyPress(key)}
-                        className="w-14 h-10 bg-card border border-border rounded-lg hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-foreground font-medium text-sm"
+                        className="w-12 h-8 bg-card border border-border rounded hover:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground font-medium text-sm"
                       >
                         {key}
                       </button>
@@ -161,11 +161,11 @@ const UpdateEmail: React.FC = () => {
                   </div>
                 ))}
                 
-                {/* Special bottom row with @gmail.com instead of space */}
-                <div className="flex justify-center space-x-2 mt-2">
+                {/* @gmail.com button */}
+                <div className="flex justify-center mt-1">
                   <button
                     onClick={() => handleKeyPress('@gmail.com')}
-                    className="px-4 h-10 bg-primary text-primary-foreground border border-primary rounded-lg hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring font-medium text-sm"
+                    className="px-3 h-8 bg-primary text-primary-foreground border border-primary rounded hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring font-medium text-sm"
                   >
                     @gmail.com
                   </button>
@@ -174,8 +174,8 @@ const UpdateEmail: React.FC = () => {
             </div>
           </div>
 
-          {/* Save Button - Fixed at bottom */}
-          <div className="text-center pt-3 pb-2">
+          {/* Confirm Button */}
+          <div className="text-center">
             <Button
               variant="success"
               size="lg"

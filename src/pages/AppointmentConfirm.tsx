@@ -17,6 +17,7 @@ const AppointmentConfirm: React.FC = () => {
   const [processing, setProcessing] = useState(false);
   
   const appointment = location.state?.appointment as AppointmentType;
+  const fromEid = location.state?.fromEid as boolean;
   
   useInactivityTimer();
 
@@ -34,6 +35,20 @@ const AppointmentConfirm: React.FC = () => {
     if (!appointment) return;
     
     setProcessing(true);
+    
+    // If appointment came from eID screen, always redirect to patient late
+    if (fromEid) {
+      try {
+        await KioskAPI.performCheckIn(appointment.id);
+        navigate('/patient-late', { state: { appointment } });
+      } catch (error) {
+        console.error('Failed to perform check-in:', error);
+        setProcessing(false);
+      }
+      return;
+    }
+    
+    // Original flow for other sources
     try {
       const result = await KioskAPI.performCheckIn(appointment.id);
       

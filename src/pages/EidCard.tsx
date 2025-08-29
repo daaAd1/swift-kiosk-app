@@ -34,7 +34,7 @@ const EidCard: React.FC = () => {
       try {
         // Simulate successful eID card reading
         const appointment = await KioskAPI.getAppointmentDetails();
-        navigate('/appointment-confirm', { state: { appointment } });
+        navigate('/appointment-confirm', { state: { appointment, fromEid: true } });
       } catch (error) {
         console.error('Failed to read eID card:', error);
         navigate('/appointment-not-found');

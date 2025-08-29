@@ -94,7 +94,7 @@ const UpdatePhone: React.FC = () => {
         
         <div className="flex-1 flex flex-col justify-between py-2">
           {/* Phone Input Display */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mb-4">
             <div className="bg-card border-2 border-border rounded-lg p-3 w-full max-w-xl">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary" />

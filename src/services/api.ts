@@ -54,10 +54,10 @@ export interface PatientFilters {
 
 // Placeholder data
 const PLACEHOLDER_CLINIC: ClinicInfo = {
-  name: "Central Medical Clinic",
+  name: "CLINIC",
   logo: "/placeholder-logo.png",
   address: "123 Medical Center Dr, Healthcare City",
-  phone: "+1 (555) 123-4567"
+  phone: "+1 (555) 123-4567",
 };
 
 const PLACEHOLDER_LANGUAGES: Language[] = [
@@ -82,9 +82,9 @@ const PLACEHOLDER_APPOINTMENT: Appointment = {
   startTime: "14:30",
   location: {
     address: "Building B, Floor 2, Room 205",
-    phone: "+1 (555) 123-4567"
+    phone: "+1 (555) 123-4567",
   },
-  isLate: false
+  isLate: false,
 };
 
 const SAME_LETTER_APPOINTMENT: Appointment = {
@@ -98,19 +98,19 @@ const SAME_LETTER_APPOINTMENT: Appointment = {
   startTime: "16:15",
   location: {
     address: "Building A, Floor 1, Room 108",
-    phone: "+1 (555) 123-4567"
+    phone: "+1 (555) 123-4567",
   },
-  isLate: false
+  isLate: false,
 };
 
 const PLACEHOLDER_CONTACT: ContactInfo = {
   email: "john.doe@email.com",
   phone: "+1 (555) 987-6543",
-  needsVerification: true
+  needsVerification: true,
 };
 
 // API delay simulation
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export class KioskAPI {
   // Welcome screen API calls
@@ -130,25 +130,88 @@ export class KioskAPI {
   }
 
   // Manual check-in API calls
-  static async getAvailableLetters(field: 'forename' | 'surname', filters: PatientFilters): Promise<string[]> {
+  static async getAvailableLetters(
+    field: "forename" | "surname",
+    filters: PatientFilters
+  ): Promise<string[]> {
     await delay(300);
     // Simulate filtering based on previous selections
-    return ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    return [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
   }
 
   static async getAvailableDecades(): Promise<string[]> {
     await delay(300);
-    return ['1940s', '1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s'];
+    return [
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s",
+    ];
   }
 
   static async getAvailableYears(): Promise<string[]> {
     await delay(300);
-    return ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999'];
+    return [
+      "1990",
+      "1991",
+      "1992",
+      "1993",
+      "1994",
+      "1995",
+      "1996",
+      "1997",
+      "1998",
+      "1999",
+    ];
   }
 
   static async getAvailableMonths(): Promise<string[]> {
     await delay(300);
-    return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
   }
 
   static async getAvailableDays(): Promise<string[]> {
@@ -157,53 +220,65 @@ export class KioskAPI {
   }
 
   // Filter methods for manual check-in
-  static async filterByDecade(decade: string): Promise<{ appointmentFound: boolean }> {
+  static async filterByDecade(
+    decade: string
+  ): Promise<{ appointmentFound: boolean }> {
     await delay(300);
     return { appointmentFound: Math.random() > 0.7 };
   }
 
-  static async filterByYear(year: string): Promise<{ appointmentFound: boolean }> {
+  static async filterByYear(
+    year: string
+  ): Promise<{ appointmentFound: boolean }> {
     await delay(300);
     return { appointmentFound: Math.random() > 0.7 };
   }
 
-  static async filterByMonth(month: string): Promise<{ appointmentFound: boolean }> {
+  static async filterByMonth(
+    month: string
+  ): Promise<{ appointmentFound: boolean }> {
     await delay(300);
     return { appointmentFound: Math.random() > 0.7 };
   }
 
-  static async filterByDay(day: string): Promise<{ appointmentFound: boolean }> {
+  static async filterByDay(
+    day: string
+  ): Promise<{ appointmentFound: boolean }> {
     await delay(300);
     return { appointmentFound: Math.random() > 0.5 };
   }
 
   // Appointment filtering and verification
-  static async findAppointments(filters: PatientFilters): Promise<{ appointments: Appointment[], isFiltered: boolean }> {
+  static async findAppointments(
+    filters: PatientFilters
+  ): Promise<{ appointments: Appointment[]; isFiltered: boolean }> {
     await delay(300);
-    
+
     // Special case: if forename and surname initials are the same, return the special appointment
-    if (filters.forenameInitial && filters.surnameInitial && 
-        filters.forenameInitial === filters.surnameInitial) {
-      
+    if (
+      filters.forenameInitial &&
+      filters.surnameInitial &&
+      filters.forenameInitial === filters.surnameInitial
+    ) {
       // Create a dynamic appointment based on the selected letter
       const selectedLetter = filters.forenameInitial;
       const dynamicAppointment: Appointment = {
         ...SAME_LETTER_APPOINTMENT,
         patientName: `${selectedLetter}lexander ${selectedLetter}. ${selectedLetter}nderson`,
         patientForename: `${selectedLetter}lexander`,
-        patientSurname: `${selectedLetter}nderson`
+        patientSurname: `${selectedLetter}nderson`,
       };
-      
+
       return {
         appointments: [dynamicAppointment],
-        isFiltered: true // Always consider it filtered when we find the same letter match
+        isFiltered: true, // Always consider it filtered when we find the same letter match
       };
     }
-    
+
     // Default behavior for other cases
     return {
       appointments: [PLACEHOLDER_APPOINTMENT],
-      isFiltered: Object.keys(filters).length >= 3 // Filtered when we have enough criteria
+      isFiltered: Object.keys(filters).length >= 3, // Filtered when we have enough criteria
     };
   }
 
@@ -230,7 +305,7 @@ export class KioskAPI {
       isLate: Math.random() > 0.8, // 20% chance of being late
       needsContactVerification: Math.random() > 0.6, // 40% chance needs verification
       needsEidRegistration: Math.random() > 0.9, // 10% chance needs eID registration
-      contactInfo: PLACEHOLDER_CONTACT
+      contactInfo: PLACEHOLDER_CONTACT,
     };
   }
 
@@ -239,7 +314,10 @@ export class KioskAPI {
     return PLACEHOLDER_CONTACT;
   }
 
-  static async updateContactInfo(patientId: string, contactInfo: Partial<ContactInfo>): Promise<boolean> {
+  static async updateContactInfo(
+    patientId: string,
+    contactInfo: Partial<ContactInfo>
+  ): Promise<boolean> {
     await delay(300);
     return true;
   }

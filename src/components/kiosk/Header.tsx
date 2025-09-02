@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import React from "react";
+import { ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   clinicName?: string;
@@ -12,29 +12,32 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  clinicName = "Central Medical Clinic",
+  clinicName = "CLINIC",
   clinicLogo,
   currentTime,
   showLanguageSelector = false,
   currentLanguage = "en",
   onLanguageChange,
-  availableLanguages = []
+  availableLanguages = [],
 }) => {
   const [showDropdown, setShowDropdown] = React.useState(false);
 
   return (
-    <header className="bg-card border-b border-border shadow-sm" style={{ height: 'var(--kiosk-header-height)' }}>
+    <header
+      className="bg-card border-b border-border shadow-sm"
+      style={{ height: "var(--kiosk-header-height)" }}
+    >
       <div className="w-full h-full">
         <div className="flex items-center justify-between h-full px-12">
           {/* Logo and Clinic Name */}
           <div className="flex items-center space-x-6">
-            {clinicLogo && (
-              <img 
-                src={clinicLogo} 
+            {/* {clinicLogo && (
+              <img
+                src={clinicLogo}
                 alt={clinicName}
                 className="h-12 w-auto object-contain"
               />
-            )}
+            )} */}
             <h1 className="text-2xl font-bold text-foreground">{clinicName}</h1>
           </div>
 
@@ -45,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
                 {currentTime}
               </div>
             )}
-            
+
             {showLanguageSelector && availableLanguages.length > 0 && (
               <div className="relative">
                 <button
@@ -53,10 +56,18 @@ const Header: React.FC<HeaderProps> = ({
                   className="flex items-center space-x-2 bg-secondary hover:bg-secondary-hover px-4 py-2 rounded-lg kiosk-interactive kiosk-touch-target"
                 >
                   <span className="text-lg">
-                    {availableLanguages.find(lang => lang.code === currentLanguage)?.flag}
+                    {
+                      availableLanguages.find(
+                        (lang) => lang.code === currentLanguage
+                      )?.flag
+                    }
                   </span>
                   <span className="font-medium">
-                    {availableLanguages.find(lang => lang.code === currentLanguage)?.name}
+                    {
+                      availableLanguages.find(
+                        (lang) => lang.code === currentLanguage
+                      )?.name
+                    }
                   </span>
                   <ChevronDown className="h-5 w-5" />
                 </button>
